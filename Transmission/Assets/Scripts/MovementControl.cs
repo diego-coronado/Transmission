@@ -7,6 +7,7 @@ public class MovementControl : MonoBehaviour {
     public float _speed = 5;
     public bool linkActivated = false;
     public bool isEnabled = false;
+    public float timeSinceLinkActivated = 10000;
 
     private Player _input;
     private float _h;
@@ -16,6 +17,7 @@ public class MovementControl : MonoBehaviour {
 	void Start () {
         //Debug.Log(Application.targetFrameRate);
         _input = ReInput.players.GetPlayer(0);
+        
 	}
 
     // Update is called once per frame
@@ -26,7 +28,10 @@ public class MovementControl : MonoBehaviour {
             _v = _input.GetAxis("MoveLeftY");
 
             linkActivated = _input.GetButton("ActivateLeftLink");
-
+            if (isEnabled && _input.GetButtonDown("ActivateLeftLink"))
+            {
+                timeSinceLinkActivated = Time.timeSinceLevelLoad;
+            }
         }
         else
         {   
@@ -34,6 +39,10 @@ public class MovementControl : MonoBehaviour {
             _v = _input.GetAxis("MoveRightY");
 
             linkActivated = _input.GetButton("ActivateRightLink");
+            if (isEnabled && _input.GetButtonDown("ActivateRightLink"))
+            {
+                timeSinceLinkActivated = Time.timeSinceLevelLoad;
+            }
         }
 
         Vector2 movement = new Vector3(_h, _v, 0);

@@ -6,12 +6,14 @@ public class EnergyLink : MonoBehaviour {
     public Transform first;
     public Transform second;
     public float minDistance = 5;
+    public float minTimeBetweenLinks = 0.5f;
 
     private LineRenderer _lineRenderer;
     private MovementControl _player1;
     private MovementControl _player2;
     private float _distance;
     private bool _canConnect;
+    
 
     // Use this for initialization
     void Start() {
@@ -34,7 +36,9 @@ public class EnergyLink : MonoBehaviour {
 
         if (_canConnect)
         {
-            if(_player1.linkActivated && _player2.linkActivated)
+            float timeBetweenLinks = Mathf.Abs(_player1.timeSinceLinkActivated - _player2.timeSinceLinkActivated);
+            Debug.Log(timeBetweenLinks);
+            if (_player1.linkActivated && _player2.linkActivated && timeBetweenLinks <= minTimeBetweenLinks)
             {
                 _lineRenderer.enabled = true;
                 _lineRenderer.SetPosition(0, first.position);
@@ -42,13 +46,13 @@ public class EnergyLink : MonoBehaviour {
             }
             else
             {
-               _lineRenderer.enabled = false;
+                _lineRenderer.enabled = false;
             }
         }
         else
         {
             _lineRenderer.enabled = false;
-            if (_player1.linkActivated && _player2.linkActivated)
+            if (_player1.linkActivated || _player2.linkActivated)
             {
                 _player1.isEnabled = false;
                 _player2.isEnabled = false;
