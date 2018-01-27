@@ -13,11 +13,11 @@ public class MovementControl : MonoBehaviour {
     private float _h;
     private float _v;
 
+	private Rigidbody2D _rigidbody;
 	// Use this for initialization
 	void Start () {
-        //Debug.Log(Application.targetFrameRate);
         _input = ReInput.players.GetPlayer(0);
-        
+		_rigidbody = GetComponent<Rigidbody2D> ();
 	}
 
     // Update is called once per frame
@@ -49,7 +49,9 @@ public class MovementControl : MonoBehaviour {
 
         Vector2 movement = new Vector3(_h, _v, 0);
         movement *= _speed * Time.deltaTime;
-        transform.Translate(movement);
+
+		Vector2 pos = new Vector2(transform.position.x,transform.position.y);
+		_rigidbody.MovePosition (pos + movement);
 
 
     }

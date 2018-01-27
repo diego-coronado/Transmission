@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gate : MonoBehaviour {
-	private GateKey[] _keys;
+	public Transform[] _gates;
+	public GateKey[] _keys;
 	private bool _shouldOpen;
 	// Use this for initialization
 	void Start () {
-		_keys = FindObjectsOfType<GateKey> ();
 	}
 	
 	// Update is called once per frame
@@ -21,10 +21,13 @@ public class Gate : MonoBehaviour {
 			}
 			_shouldOpen = true;
 		} else {
-			Vector3 localScale = transform.localScale;
-			localScale.x -= Time.deltaTime*8;
-			localScale.x = Mathf.Max (localScale.x, 0);
-			transform.localScale = localScale;
+			foreach (var theGate in _gates) {
+				Vector3 localScale = theGate.localScale;
+				localScale.x -= Time.deltaTime*8;
+				localScale.x = Mathf.Max (localScale.x, 0);
+				theGate.localScale = localScale;	
+			}
+
 		}
 
 
