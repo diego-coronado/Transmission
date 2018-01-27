@@ -65,16 +65,38 @@ public class EnergyLink : MonoBehaviour {
                 _lineRenderer.enabled = true;
                 _lineRenderer.SetPosition(0, first.position);
                 _lineRenderer.SetPosition(1, second.position);
+                _player1.GetComponent<Renderer>().material.color = Color.magenta;
+                _player1.GetComponent<Light>().color = Color.magenta;
+                _player2.GetComponent<Renderer>().material.color = Color.magenta;
+                _player2.GetComponent<Light>().color = Color.magenta;
             }
             else
             {
                 _lineRenderer.enabled = false;
+
+                _player2.GetComponent<Renderer>().material.color = Color.red;
+                Color c2 = new Color(0.85f, 0.24f, 0.47f, 1);
+                _player2.GetComponent<Light>().color = c2;
+                
+                _player1.GetComponent<Renderer>().material.color = Color.blue;
+                Color c1 = new Color(0.24f, 0.57f, 0.85f, 1);
+                _player1.GetComponent<Light>().color = c1;
+               
             }
         }
         else
         {
             _player1.GetComponent<Light>().enabled = false;
             _player2.GetComponent<Light>().enabled = false;
+
+            _player2.GetComponent<Renderer>().material.color = Color.red;
+            Color c2 = new Color(0.85f, 0.24f, 0.47f, 1);
+            _player2.GetComponent<Light>().color = c2;
+            _player2.GetComponent<Light>().enabled = false;
+            _player1.GetComponent<Renderer>().material.color = Color.blue;
+            Color c1 = new Color(0.24f, 0.57f, 0.85f, 1);
+            _player1.GetComponent<Light>().color = c1;
+            _player1.GetComponent<Light>().enabled = false;
 
             _lineRenderer.enabled = false;
             if (_player1.linkActivated || _player2.linkActivated)
