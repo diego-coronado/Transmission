@@ -29,7 +29,7 @@ public class ElectricGrid : MonoBehaviour {
 		if(counter >= 2){
 			_clickCounter++;
 			if (_clickCounter >= _requiredClicks) {
-				SendMessage (OnActivateMessage);
+				SendMessage (OnActivateMessage,SendMessageOptions.DontRequireReceiver);
 				Finish ();
 			} else {
 				ChooseNewPanels();

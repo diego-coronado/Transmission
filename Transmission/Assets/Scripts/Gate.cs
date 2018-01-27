@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gate : MonoBehaviour {
 	public Transform[] _gates;
 	public GateKey[] _keys;
+	public string onUnlockGateMessage = "";
 	private bool _shouldOpen;
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class Gate : MonoBehaviour {
 				}
 			}
 			_shouldOpen = true;
+			SendMessage (onUnlockGateMessage,SendMessageOptions.DontRequireReceiver);
 		} else {
 			foreach (var theGate in _gates) {
 				Vector3 localScale = theGate.localScale;

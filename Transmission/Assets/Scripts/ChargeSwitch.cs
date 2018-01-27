@@ -35,14 +35,14 @@ public class ChargeSwitch : MonoBehaviour
 
         if (_player)
         {
-            if (_player._playerId == 0)
+			if (_player._playerType == MovementControl.PlayerType.BluePlayer)
             {
                 if (_input.GetButtonDown("ActivateLeftLink"))
                 {
                     ChargeEnergy();
                 }
             }
-            else if (_player._playerId == 1)
+			else if (_player._playerType == MovementControl.PlayerType.RedPlayer)
             {
                 if (_input.GetButtonDown("ActivateRightLink"))
                 {

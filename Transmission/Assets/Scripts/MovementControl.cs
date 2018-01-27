@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 public class MovementControl : MonoBehaviour {
-    public int _playerId = 0;
+	public enum PlayerType
+	{
+		BluePlayer,
+		RedPlayer,
+		PurplePlayer
+	}
+	public PlayerType _playerType;
     public float _speed = 5;
     public bool linkActivated = false;
     public bool isEnabled = false;
@@ -22,7 +28,7 @@ public class MovementControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (_playerId == 0)
+		if (_playerType == PlayerType.BluePlayer)
         {
             _h = _input.GetAxis("MoveLeftX");
             _v = _input.GetAxis("MoveLeftY");

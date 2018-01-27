@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnergyLink : MonoBehaviour {
+	
     public Transform first;
     public Transform second;
+
+	public LayerMask mask;
+
     public float minDistance = 5;
     public float minTimeBetweenLinks = 0.5f;
 
@@ -28,6 +32,17 @@ public class EnergyLink : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+		if (Physics2D.Linecast(first.position,second.position,mask)) {
+			_player1.GetComponent<Light>().enabled = false;
+			_player2.GetComponent<Light>().enabled = false;
+			_player1.isEnabled = false;
+			_player2.isEnabled = false;
+			_canConnect = false;
+			_lineRenderer.enabled = false;
+			return;
+		}
+
         _distance = Vector3.Distance(first.position, second.position);
         if (_distance <= minDistance && _player1.isEnabled)
         {
