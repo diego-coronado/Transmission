@@ -9,6 +9,10 @@ public class EnergyLink : MonoBehaviour {
     public float minTimeBetweenLinks = 0.5f;
 
     private LineRenderer _lineRenderer;
+	public LineRenderer LineRenderer {
+		get{ return _lineRenderer; }
+		set{ _lineRenderer = value; }
+	}
     private MovementControl _player1;
     private MovementControl _player2;
     private float _distance;
