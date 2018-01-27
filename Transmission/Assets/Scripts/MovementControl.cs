@@ -31,7 +31,6 @@ public class MovementControl : MonoBehaviour {
             if (_input.GetButtonDown("ActivateLeftLink"))
             {
                 timeSinceLinkActivated = Time.timeSinceLevelLoad;
-                GameObject.FindObjectOfType<ChargeSwitch>().ChargeEnergy();
             }
         }
         else
@@ -43,7 +42,6 @@ public class MovementControl : MonoBehaviour {
             if ( _input.GetButtonDown("ActivateRightLink"))
             {
                 timeSinceLinkActivated = Time.timeSinceLevelLoad;
-                GameObject.FindObjectOfType<ChargeSwitch>().ChargeEnergy();
             }
         }
 
