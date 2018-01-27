@@ -36,6 +36,9 @@ public class EnergyLink : MonoBehaviour {
 
         if (_canConnect)
         {
+            _player1.GetComponent<Light>().enabled = true;
+            _player2.GetComponent<Light>().enabled = true;
+
             float timeBetweenLinks = Mathf.Abs(_player1.timeSinceLinkActivated - _player2.timeSinceLinkActivated);
             Debug.Log(timeBetweenLinks);
             if (_player1.linkActivated && _player2.linkActivated && timeBetweenLinks <= minTimeBetweenLinks)
@@ -51,6 +54,9 @@ public class EnergyLink : MonoBehaviour {
         }
         else
         {
+            _player1.GetComponent<Light>().enabled = false;
+            _player2.GetComponent<Light>().enabled = false;
+
             _lineRenderer.enabled = false;
             if (_player1.linkActivated || _player2.linkActivated)
             {
