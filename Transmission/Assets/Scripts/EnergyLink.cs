@@ -21,6 +21,9 @@ public class EnergyLink : MonoBehaviour {
     private MovementControl _player2;
     private float _distance;
     private bool _canConnect;
+    private int _playerPurpleLayer = 10;
+    private int _playerRedLayer = 9;
+    private int _playerBlueLayer = 8;
     
 
     // Use this for initialization
@@ -67,18 +70,22 @@ public class EnergyLink : MonoBehaviour {
                 _lineRenderer.SetPosition(1, second.position);
                 _player1.GetComponent<Renderer>().material.color = Color.magenta;
                 _player1.GetComponent<Light>().color = Color.magenta;
+                _player1.gameObject.layer = _playerPurpleLayer;
                 _player2.GetComponent<Renderer>().material.color = Color.magenta;
                 _player2.GetComponent<Light>().color = Color.magenta;
+                _player2.gameObject.layer = _playerPurpleLayer;
             }
             else
             {
                 _lineRenderer.enabled = false;
 
                 _player2.GetComponent<Renderer>().material.color = Color.red;
+                _player2.gameObject.layer = _playerRedLayer;
                 Color c2 = new Color(0.85f, 0.24f, 0.47f, 1);
                 _player2.GetComponent<Light>().color = c2;
                 
                 _player1.GetComponent<Renderer>().material.color = Color.blue;
+                _player1.gameObject.layer = _playerBlueLayer;
                 Color c1 = new Color(0.24f, 0.57f, 0.85f, 1);
                 _player1.GetComponent<Light>().color = c1;
                
@@ -93,7 +100,10 @@ public class EnergyLink : MonoBehaviour {
             Color c2 = new Color(0.85f, 0.24f, 0.47f, 1);
             _player2.GetComponent<Light>().color = c2;
             _player2.GetComponent<Light>().enabled = false;
+            _player2.gameObject.layer = _playerRedLayer;
+
             _player1.GetComponent<Renderer>().material.color = Color.blue;
+            _player1.gameObject.layer = _playerBlueLayer;
             Color c1 = new Color(0.24f, 0.57f, 0.85f, 1);
             _player1.GetComponent<Light>().color = c1;
             _player1.GetComponent<Light>().enabled = false;
