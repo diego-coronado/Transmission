@@ -28,9 +28,10 @@ public class MovementControl : MonoBehaviour {
             _v = _input.GetAxis("MoveLeftY");
 
             linkActivated = _input.GetButton("ActivateLeftLink");
-            if (isEnabled && _input.GetButtonDown("ActivateLeftLink"))
+            if (_input.GetButtonDown("ActivateLeftLink"))
             {
                 timeSinceLinkActivated = Time.timeSinceLevelLoad;
+                GameObject.FindObjectOfType<ChargeSwitch>().ChargeEnergy();
             }
         }
         else
@@ -39,9 +40,10 @@ public class MovementControl : MonoBehaviour {
             _v = _input.GetAxis("MoveRightY");
 
             linkActivated = _input.GetButton("ActivateRightLink");
-            if (isEnabled && _input.GetButtonDown("ActivateRightLink"))
+            if ( _input.GetButtonDown("ActivateRightLink"))
             {
                 timeSinceLinkActivated = Time.timeSinceLevelLoad;
+                GameObject.FindObjectOfType<ChargeSwitch>().ChargeEnergy();
             }
         }
 
