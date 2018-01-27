@@ -11,12 +11,12 @@ public class MovementControl : MonoBehaviour {
 
     private void Awake()
     {
-        Application.targetFrameRate = 5;
+        //Application.targetFrameRate = 5;
     }
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log(Application.targetFrameRate);
+        //Debug.Log(Application.targetFrameRate);
         _input = ReInput.players.GetPlayer(0);
 	}
 
