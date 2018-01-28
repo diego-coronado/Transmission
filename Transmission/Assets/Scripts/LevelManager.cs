@@ -40,15 +40,27 @@ public class LevelManager : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PlayerPrefs.SetInt("Level", 0);
-        }
+		if (Input.GetKeyDown(KeyCode.F))
+		{
+			PlayerPrefs.SetInt("Level", 0);
+			Debug.Log("currentLevel set to:0") ;
+		}
+		int currentLevel = PlayerPrefs.GetInt("Level", 0);
+		if (Input.GetKeyDown(KeyCode.Y))
+		{
+			PlayerPrefs.SetInt("Level", currentLevel+1);
+			Debug.Log("currentLevel set to:"+(currentLevel+1)) ;
+		}
+		if (Input.GetKeyDown(KeyCode.T))
+		{
+			PlayerPrefs.SetInt("Level", currentLevel-1);
+			Debug.Log("currentLevel set to:"+(currentLevel-1)) ;
+		}
 
         if (_runTimer)
         {
             _timer -= Time.deltaTime;
-            Debug.Log(_timer);
+//            Debug.Log(_timer);
             timerText.text = "Tiempo para terminar: " + _timer;
             if (_timer <= 0)
             {

@@ -6,21 +6,51 @@ public class CirclePath : MonoBehaviour {
 	public float _radius = 5;
 	public int _laps = 5;
 	public bool _isGravityOn;
-
+	public string _onFinishLaps = "ActivateGateKey";
 	private Switch _switchScript;
+	private EnergyLink _energyLink;
 	// Use this for initialization
 	void Start () {
 		_switchScript = GetComponent<Switch> ();
+		_energyLink = FindObjectOfType<EnergyLink> ();
+		_playerStartAngles = new float[2];
 	}
-
-	private float _playerStartingAngle;
+	private float[] _playerStartAngles;
 	// Update is called once per frame
 	void Update () {
-		foreach (var player in _switchScript._playersInside) {
-			if (player.CirclingAngle - _playerStartingAngle > 360*5) {
+
+		if (_switchScript._switchColor == MovementControl.PlayerType.PurplePlayer) {
+			int playersWithEnoughLaps = 0;
+			for (int i = 0; i < _switchScript._playersInside.Count; i++) {
+				MovementControl player = _switchScript._playersInside [i];
+				if (!_energyLink.LineRenderer.enabled) {
+					_playerStartAngles[i] = player.CirclingAngle;
+				}
+				if (Mathf.Abs(player.CirclingAngle - _playerStartAngles[i]) > 360*5) {
+					playersWithEnoughLaps++;
+
+				}
+			}
+			if (playersWithEnoughLaps == 2) {
+				SendMessage (_onFinishLaps, SendMessageOptions.DontRequireReceiver);
 				DettachPlayersInside ();
 			}
+
+		} else {
+			for (int i = 0; i < _switchScript._playersInside.Count; i++) {
+				MovementControl player = _switchScript._playersInside [i];
+				if (player._playerType != _switchScript._switchColor) {
+					return;
+				}
+
+				if (Mathf.Abs(player.CirclingAngle - _playerStartAngles[i]) > 360*5) {
+					SendMessage (_onFinishLaps, SendMessageOptions.DontRequireReceiver);
+					DettachPlayersInside ();
+				}
+			}
+
 		}
+
 
 	}
 
@@ -32,8 +62,16 @@ public class CirclePath : MonoBehaviour {
 	}
 
 	void AttachPlayersInside(){
+		Debug.Log ("attach players inside");
 		_isGravityOn = true;
-		foreach (var player in _switchScript._playersInside) {
+		for (int i = 0; i < _switchScript._playersInside.Count; i++) {
+			
+			MovementControl player = _switchScript._playersInside [i];
+			if (_switchScript._switchColor != MovementControl.PlayerType.PurplePlayer) {
+				if (_switchScript._switchColor != player._playerType) {
+					return;
+				}
+			}
 			player._movementMode = MovementControl.MovementMode.Circle;
 			player.CirclingCenter = transform.position;
 			player.CirclingRadius = _radius;
@@ -45,7 +83,7 @@ public class CirclePath : MonoBehaviour {
 				angle = 360 - angle;
 			}
 			player.CirclingAngle = angle;
-			_playerStartingAngle = angle;
+			_playerStartAngles [i] = angle;
 		}
 	}
 
