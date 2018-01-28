@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1120457435281864}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.82, y: 5.09, z: -6}
+  m_LocalPosition: {x: -0.72, y: 0.9, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 4796551526930732}
@@ -128,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082564905750376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.2980676, y: 27.993935, z: 1}
+  m_LocalPosition: {x: -4.002447, y: 46.642426, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4496161974950168}
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeDifference: 0.2
-  chargeIncreaseSpeed: 3.5
-  chargeReductionSpeed: 15
+  chargeIncreaseSpeed: 5
+  chargeReductionSpeed: 7.5
   maxCharge: 100
   OnChargedMessage: ActivateGateKey
 --- !u!114 &114444411844474088
@@ -239,6 +239,7 @@ MonoBehaviour:
   _requireLink: 0
   _mustHoldDown: 1
   OnActivateMessage: 
+  _playersInside: []
 --- !u!114 &114831141475095442
 MonoBehaviour:
   m_ObjectHideFlags: 1

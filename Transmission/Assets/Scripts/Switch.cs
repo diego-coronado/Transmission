@@ -42,6 +42,8 @@ public class Switch : MonoBehaviour {
 						_spriteRenderer.color = new Color(0,0.5f,1);	
 					} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
 						_spriteRenderer.color = Color.red;	
+					} else if(_switchColor == MovementControl.PlayerType.AnyPlayer) {
+						_spriteRenderer.color = Color.yellow;	
 					}else{
 						_spriteRenderer.color = new Color(0.5f,0,1);
 					}
@@ -64,7 +66,10 @@ public class Switch : MonoBehaviour {
 						_isPlayerInside = true;
 						CheckStepOnSwitch ();
 					}
-				} else {
+				} else if(_switchColor == MovementControl.PlayerType.AnyPlayer){
+					_isPlayerInside = true;
+					CheckStepOnSwitch ();
+				}else {
 					if (_switchColor == playerScript._playerType) {
 						_isPlayerInside = true;
 						CheckStepOnSwitch ();
@@ -91,22 +96,26 @@ public class Switch : MonoBehaviour {
 
 			if (_switchColor == MovementControl.PlayerType.PurplePlayer) {
 				_isPlayerInside = false;
+			} else if(_switchColor == MovementControl.PlayerType.AnyPlayer) {
+				_isPlayerInside = false;
 			} else {
 				if (_switchColor == playerScript._playerType) {
 					_isPlayerInside = false;
 				}
 			}
 
-			if (_switchColor == MovementControl.PlayerType.BluePlayer) {
-				_spriteRenderer.color = new Color(0,0.5f,1);	
-			} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
-				_spriteRenderer.color = Color.red;	
-			}else{
-				_spriteRenderer.color = new Color(0.5f,0,1);
+			if (!_isPlayerInside) {
+				if (_switchColor == MovementControl.PlayerType.BluePlayer) {
+					_spriteRenderer.color = new Color(0,0.5f,1);	
+				} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
+					_spriteRenderer.color = Color.red;	
+				} else if(_switchColor == MovementControl.PlayerType.AnyPlayer) {
+					_spriteRenderer.color = Color.yellow;	
+				}else{
+					_spriteRenderer.color = new Color(0.5f,0,1);
+				}
+				_isOn = false;
 			}
-			_isOn = false;
-
-
 		}
 	}
 
@@ -120,6 +129,8 @@ public class Switch : MonoBehaviour {
 			_spriteRenderer.color = new Color(0,0.5f,1);	
 		} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
 			_spriteRenderer.color = Color.red;	
+		}else if(_switchColor == MovementControl.PlayerType.AnyPlayer){
+			_spriteRenderer.color = Color.yellow;
 		}else{
 			_spriteRenderer.color = new Color(0.5f,0,1);
 		}
@@ -136,6 +147,12 @@ public class Switch : MonoBehaviour {
 		if (_switchColor == MovementControl.PlayerType.RedPlayer &&
 			!_energyLink.RedPlayer.linkActivated) {
 			activate = false;
+		}
+
+		if (_switchColor == MovementControl.PlayerType.AnyPlayer) {
+			if (!_playersInside[0].linkActivated ) {
+				activate = false;	
+			}
 		}
 
 		//chequeamos si el link esta activo entre los jugadores

@@ -7,7 +7,8 @@ public class MovementControl : MonoBehaviour {
 	{
 		BluePlayer,
 		RedPlayer,
-		PurplePlayer
+		PurplePlayer,
+		AnyPlayer
 	}
 	public PlayerType _playerType;
     public float _speed = 5;

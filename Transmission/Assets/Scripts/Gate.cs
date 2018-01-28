@@ -9,6 +9,7 @@ public class Gate : MonoBehaviour {
 	private bool _shouldOpen;
 	// Use this for initialization
 	void Start () {
+		
 	}
 	
 	// Update is called once per frame

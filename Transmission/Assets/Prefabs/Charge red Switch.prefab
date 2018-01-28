@@ -223,6 +223,7 @@ MonoBehaviour:
   _requireLink: 0
   _mustHoldDown: 1
   OnActivateMessage: 
+  _playersInside: []
 --- !u!114 &114825555007532156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,8 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeDifference: 0.2
-  chargeIncreaseSpeed: 3.5
-  chargeReductionSpeed: 15
+  chargeIncreaseSpeed: 5
+  chargeReductionSpeed: 7.5
   maxCharge: 100
   OnChargedMessage: ActivateGateKey
 --- !u!114 &114875442895742372

@@ -26,7 +26,8 @@ public class CirclePath : MonoBehaviour {
 				if (!_energyLink.LineRenderer.enabled) {
 					_playerStartAngles[i] = player.CirclingAngle;
 				}
-				if (Mathf.Abs(player.CirclingAngle - _playerStartAngles[i]) > 360*5) {
+				Debug.Log ("circling angle:"+player.CirclingAngle);
+				if (Mathf.Abs(player.CirclingAngle - _playerStartAngles[i]) > 360*_laps) {
 					playersWithEnoughLaps++;
 
 				}
@@ -43,7 +44,7 @@ public class CirclePath : MonoBehaviour {
 					return;
 				}
 
-				if (Mathf.Abs(player.CirclingAngle - _playerStartAngles[i]) > 360*5) {
+				if (Mathf.Abs(player.CirclingAngle - _playerStartAngles[i]) > 360*_laps) {
 					SendMessage (_onFinishLaps, SendMessageOptions.DontRequireReceiver);
 					DettachPlayersInside ();
 				}

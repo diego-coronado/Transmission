@@ -19,15 +19,22 @@ public class ChargeSwitch : MonoBehaviour
     private Player _input;
     private bool _hasPlayerLeft = false;
     private bool _finishedCharging = false;
+	private Switch _switchScript;
 
     private void Start()
     {
+		_switchScript = GetComponent<Switch> ();
         _input = ReInput.players.GetPlayer(0);
+		_energyCharged = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+		if (_energyCharged < 0) {
+			_energyCharged = 0;
+		}
+
         if (_hasPlayerLeft && _energyCharged>0 && !_finishedCharging)
         {
             _energyCharged -= Time.deltaTime * chargeReductionSpeed;
@@ -67,8 +74,8 @@ public class ChargeSwitch : MonoBehaviour
     {
         if (_player)
         {
-            Debug.Log("time diff: " + timeDif);
-            Debug.Log("aumento de carga");
+  //          Debug.Log("time diff: " + timeDif);
+//            Debug.Log("aumento de carga");
             _energyCharged += chargeIncreaseSpeed;
 
             if (_energyCharged > maxCharge)
@@ -81,7 +88,7 @@ public class ChargeSwitch : MonoBehaviour
             }
 
             _isLinkPressed = true;
-            Debug.Log("Energy charged: " + _energyCharged);
+    //        Debug.Log("Energy charged: " + _energyCharged);
         }
     }
 
@@ -89,6 +96,7 @@ public class ChargeSwitch : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+
             _player = other.GetComponent<MovementControl>();
             _hasPlayerLeft = false;
         }

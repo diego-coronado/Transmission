@@ -132,8 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _switchColor: 0
   _requireLink: 0
-  _mustHoldDown: 0
+  _mustHoldDown: 1
   OnActivateMessage: ActivateGateKey
+  _playersInside: []
 --- !u!114 &114416747698363388
 MonoBehaviour:
   m_ObjectHideFlags: 1
