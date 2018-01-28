@@ -3,24 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NextLevelTrigger : MonoBehaviour {
-	public NextLevelTrigger _other;
 	public bool _activated;
 	private static CameraControl _cameraControl;
+	private static MovementControl[] _players;
+	private Collider2D[] _colliders;
 	// Use this for initialization
 	void Start () {
+		_colliders = GetComponentsInChildren<Collider2D> ();
 		if (_cameraControl == null) {
 			_cameraControl = FindObjectOfType<CameraControl> ();
 		}
-	}
-	
-	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "Player") {
-			_activated = true;
-			if (_other._activated) {
-				_cameraControl.MoveToNextLevel ();
-				_other.gameObject.SetActive (false);
-				gameObject.SetActive (false);
-			}
+		if (_players == null) {
+			_players = FindObjectsOfType<MovementControl> ();
+		}
+
+		foreach (var theCol in _colliders) {
+			theCol.enabled = false;
 		}
 	}
+
+	void Update(){
+		if (_activated) {
+			return;
+		}
+		foreach (var thePlayer in _players) {
+			if (thePlayer.transform.position.y <= transform.position.y) {
+				return;
+			}
+		}
+		_activated = true;
+		foreach (var theCol in _colliders) {
+			theCol.enabled = true;
+		}
+		_cameraControl.MoveToNextLevel ();
+	}
+		
 }

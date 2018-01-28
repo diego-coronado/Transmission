@@ -16,14 +16,14 @@ public class Switch : MonoBehaviour {
 		set { _isOn = value;}
 	}
 
-	private List<MovementControl> _playersInside;
-	private Renderer _renderer;
+	public List<MovementControl> _playersInside;
+	private SpriteRenderer _spriteRenderer;
 	private bool _isPlayerInside = false;
 
 	// Use this for initialization
 	void Awake () {
 		_playersInside = new List<MovementControl> ();
-		_renderer = GetComponent<Renderer>();
+		_spriteRenderer = GetComponent<SpriteRenderer> ();
 		if (_energyLink == null) {
 			_energyLink = FindObjectOfType<EnergyLink> ();
 		}
@@ -32,18 +32,18 @@ public class Switch : MonoBehaviour {
 
 	void Update(){
 		if (_isPlayerInside) {
-			if (_renderer.material.color != Color.green) {
+			if (_spriteRenderer.color != Color.green) {
 				CheckStepOnSwitch ();
 
 			} else {
 				if (_requireLink && !_energyLink.LineRenderer.enabled) {
 					_isOn = false;
 					if (_switchColor == MovementControl.PlayerType.BluePlayer) {
-						_renderer.material.color = Color.blue;	
+						_spriteRenderer.color = new Color(0,0.5f,1);	
 					} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
-						_renderer.material.color = Color.red;	
+						_spriteRenderer.color = Color.red;	
 					}else{
-						_renderer.material.color = new Color(0.5f,0,1);
+						_spriteRenderer.color = new Color(0.5f,0,1);
 					}
 				}
 			}
@@ -98,11 +98,11 @@ public class Switch : MonoBehaviour {
 			}
 
 			if (_switchColor == MovementControl.PlayerType.BluePlayer) {
-				_renderer.material.color = Color.blue;	
+				_spriteRenderer.color = new Color(0,0.5f,1);	
 			} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
-				_renderer.material.color = Color.red;	
+				_spriteRenderer.color = Color.red;	
 			}else{
-				_renderer.material.color = new Color(0.5f,0,1);
+				_spriteRenderer.color = new Color(0.5f,0,1);
 			}
 			_isOn = false;
 
@@ -111,28 +111,39 @@ public class Switch : MonoBehaviour {
 	}
 
 	void OnDisable(){
-		_renderer.material.color = Color.white;
+		_spriteRenderer.color = Color.white;
 		_isPlayerInside = false;
 	}
 
 	void OnEnable(){
 		if (_switchColor == MovementControl.PlayerType.BluePlayer) {
-			_renderer.material.color = Color.blue;	
+			_spriteRenderer.color = new Color(0,0.5f,1);	
 		} else if(_switchColor == MovementControl.PlayerType.RedPlayer) {
-			_renderer.material.color = Color.red;	
+			_spriteRenderer.color = Color.red;	
 		}else{
-			_renderer.material.color = new Color(0.5f,0,1);
+			_spriteRenderer.color = new Color(0.5f,0,1);
 		}
 	}
 		
 
 	void CheckStepOnSwitch(){
 		bool activate = true;
+		//linkActivated me dice si el jugador presiono el boton de accion
+		if (_switchColor == MovementControl.PlayerType.BluePlayer &&
+			!_energyLink.BluePlayer.linkActivated) {
+			activate = false;
+		}
+		if (_switchColor == MovementControl.PlayerType.RedPlayer &&
+			!_energyLink.RedPlayer.linkActivated) {
+			activate = false;
+		}
+
+		//chequeamos si el link esta activo entre los jugadores
 		if (_requireLink && !_energyLink.LineRenderer.enabled) {
 			activate = false;
 		}
 		if (activate) {
-			_renderer.material.color = Color.green;
+			_spriteRenderer.color = Color.green;
 			if (OnActivateMessage != "") {
 				SendMessage (OnActivateMessage,SendMessageOptions.DontRequireReceiver);
 			}

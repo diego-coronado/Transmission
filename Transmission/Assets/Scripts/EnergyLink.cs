@@ -18,7 +18,13 @@ public class EnergyLink : MonoBehaviour {
 		set{ _lineRenderer = value; }
 	}
     private MovementControl _player1;
+	public MovementControl BluePlayer {
+		get{ return _player1; }
+	}
     private MovementControl _player2;
+	public MovementControl RedPlayer {
+		get{ return _player2; }
+	}
     private float _distance;
     private bool _canConnect;
     private int _playerPurpleLayer = 10;
