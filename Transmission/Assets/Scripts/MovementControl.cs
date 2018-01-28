@@ -11,6 +11,7 @@ public class MovementControl : MonoBehaviour {
 	}
 	public PlayerType _playerType;
     public float _speed = 5;
+	public float _circleSpeed = 60;
 	[System.NonSerialized]
     public bool linkActivated = false;
 	[System.NonSerialized]
@@ -38,6 +39,12 @@ public class MovementControl : MonoBehaviour {
 		set{ _circlingAngle = value; }
 	}
 
+	private float _circlingRadius;
+	public float CirclingRadius {
+		get{ return _circlingRadius; }
+		set{ _circlingRadius = value; }
+	}
+
     private Player _input;
     private float _h;
     private float _v;
@@ -56,15 +63,20 @@ public class MovementControl : MonoBehaviour {
 		if (_movementMode == MovementMode.Normal) {
 			movement = new Vector3(_h, _v, 0);
 			movement *= _speed * Time.deltaTime;	
+			Vector2 pos = new Vector2(transform.position.x,transform.position.y);
+			_rigidbody.MovePosition (pos + movement);
 		} else {
-			_circlingAngle += _h * _speed * Time.deltaTime;
-			movement = Quaternion.Euler (0, 0, _circlingAngle) * Vector3.up;
+			_circlingAngle += _h * _circleSpeed*Time.deltaTime;
+			movement = _circlingCenter;
+			Vector3 rotVector = Quaternion.Euler (0, 0, -_circlingAngle) * Vector3.up * _circlingRadius;
+			movement += new Vector2 (rotVector.x, rotVector.y);
 
+
+			_rigidbody.MovePosition (movement);
 		}
       
 
-		Vector2 pos = new Vector2(transform.position.x,transform.position.y);
-		_rigidbody.MovePosition (pos + movement);
+
 
 
     }

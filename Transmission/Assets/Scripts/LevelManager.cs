@@ -18,9 +18,10 @@ public class LevelManager : MonoBehaviour {
 
     private void Awake()
     {
-        /*PlayerPrefs.SetInt("Level", 0);
+        /*
+		PlayerPrefs.SetInt("Level", 0);
         Application.Quit();
-        */
+		*/
         _currentLevel = PlayerPrefs.GetInt("Level", 0);
         Debug.Log("lvl en awake "+_currentLevel);
         player1.position = new Vector3(4, 10 * _currentLevel - 4, 0);

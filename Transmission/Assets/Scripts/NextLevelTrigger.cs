@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NextLevelTrigger : MonoBehaviour {
 	public bool _activated;
+	private bool _startChecking;
 	private static CameraControl _cameraControl;
 	public MovementControl[] _players;
 	private Collider2D[] _colliders;
@@ -13,17 +14,17 @@ public class NextLevelTrigger : MonoBehaviour {
 		if (_cameraControl == null) {
 			_cameraControl = FindObjectOfType<CameraControl> ();
 		}
-		if (_players == null) {
-			_players = FindObjectsOfType<MovementControl> ();
-		}
+
+		_players = FindObjectsOfType<MovementControl> ();
 
 		foreach (var theCol in _colliders) {
-			theCol.enabled = false;
+			theCol.enabled = true;
+			theCol.isTrigger = true;
 		}
 	}
 
 	void Update(){
-		if (_activated) {
+		if (_activated || !_startChecking) {
 			return;
 		}
 
@@ -39,8 +40,14 @@ public class NextLevelTrigger : MonoBehaviour {
 		_activated = true;
 		foreach (var theCol in _colliders) {
 			theCol.enabled = true;
+			theCol.isTrigger = false;
 		}
 		_cameraControl.MoveToNextLevel ();
 	}
 		
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.tag =="Player") {
+			_startChecking = true;
+		}
+	}
 }
