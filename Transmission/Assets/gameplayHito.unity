@@ -2644,7 +2644,8 @@ MonoBehaviour:
   - {fileID: 1409760226}
   - {fileID: 870499130}
   _keys:
-  - {fileID: 1755268664}
+  - {fileID: 473786288}
+  - {fileID: 1604272608}
   onUnlockGateMessage: 
 --- !u!4 &390317802
 Transform:
@@ -2965,6 +2966,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1980d160f8d1843079352f3ee33aaeb6, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &473786288 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114857128367581990, guid: 336267ddcde63479dabe432af60fe1fd,
+    type: 2}
+  m_PrefabInternal: {fileID: 351139363}
+  m_Script: {fileID: 11500000, guid: d7bff53c806cc4dd19b070272604a1ef, type: 3}
 --- !u!1001 &504972211
 Prefab:
   m_ObjectHideFlags: 0
@@ -5572,6 +5579,8 @@ MonoBehaviour:
   - 30
   - 30
   - 30
+  - 45
+  - 45
   - 45
   - 45
 --- !u!4 &911902042
@@ -8352,6 +8361,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d6839e4fe614479a9cabb43e2a39909, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1604272608 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114270440807568244, guid: 65e3d61c42845409db9593d0745a7fdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 830367938}
+  m_Script: {fileID: 11500000, guid: d7bff53c806cc4dd19b070272604a1ef, type: 3}
 --- !u!1 &1694639813
 GameObject:
   m_ObjectHideFlags: 0
