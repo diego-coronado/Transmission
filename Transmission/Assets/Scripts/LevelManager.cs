@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Pixelation.Scripts;
 
 public class LevelManager : MonoBehaviour {
     public Text timerText;
 
     public GameObject mainCamera;
+    public GameObject photoCamera;
     public Transform player1;
     public Transform player2;
 
@@ -59,7 +61,26 @@ public class LevelManager : MonoBehaviour {
     {
         _currentLevel = PlayerPrefs.GetInt("Level", 0);
         PlayerPrefs.SetInt("Level", _currentLevel + 1);
-        Debug.Log("nuevo lvl: "+(_currentLevel+1));
+
+        //Manejar fotos
+        if((_currentLevel + 1) % 2 == 0)
+        {
+            var pixelation = photoCamera.GetComponent<Pixelation>();
+            pixelation.enabled = true;
+            //pixelation.BlockCount++;
+            photoCamera.GetComponent<Camera>().enabled = true;
+
+            GetComponent<Animator>().SetTrigger("pixelation");
+        }
+        else
+        {
+            ChangeLevel();
+        }
+    }
+
+    public void ChangeLevel()
+    {
+        Debug.Log("nuevo lvl: " + (_currentLevel + 1));
         CancelInvoke("GameOver");
         Invoke("GameOver", _maxTimePerLevel[_currentLevel + 1]);
         _timer = _maxTimePerLevel[_currentLevel + 1];
@@ -70,5 +91,13 @@ public class LevelManager : MonoBehaviour {
     {
         _runTimer = false;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
+    private void DeactivateLvlCamera()
+    {
+        var pixelation = photoCamera.GetComponent<Pixelation>();
+        pixelation.enabled = false;
+        //pixelation.BlockCount++;
+        photoCamera.GetComponent<Camera>().enabled = false;
     }
 }
