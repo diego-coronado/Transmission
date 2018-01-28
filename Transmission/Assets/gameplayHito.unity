@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -3121,9 +3120,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ac8361682ca544aa2f522e99180a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 2138843420}
   mainCamera: {fileID: 1493778998}
   player1: {fileID: 1792928973}
   player2: {fileID: 1593478027}
+  _maxTimePerLevel:
+  - 15
+  - 10
+  - 30
+  - 30
 --- !u!4 &911902042
 Transform:
   m_ObjectHideFlags: 0
@@ -3276,8 +3281,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 956467782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 600.5, y: 211.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2138843419}
   m_Father: {fileID: 0}
@@ -3343,7 +3348,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -4635,7 +4639,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -4664,8 +4667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160f9c0df2938452f846d88f7fdfc7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 2138843420}
-  _maxTime: 30
+  lvlManager: {fileID: 911902041}
 --- !u!1 &1574340057
 GameObject:
   m_ObjectHideFlags: 0
@@ -5731,7 +5733,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2138843418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 41, y: 187, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 956467786}

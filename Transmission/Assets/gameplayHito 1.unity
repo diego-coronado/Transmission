@@ -1895,9 +1895,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ac8361682ca544aa2f522e99180a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 742622394}
   mainCamera: {fileID: 1493778998}
   player1: {fileID: 1792928973}
   player2: {fileID: 1593478027}
+  _maxTimePerLevel:
+  - 30
+  - 30
+  - 30
+  - 30
 --- !u!1 &576902651 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1082564905750376, guid: 0c36c0451839e49ba9fe105d604ee8c8,
@@ -4955,8 +4961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160f9c0df2938452f846d88f7fdfc7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 742622394}
-  _maxTime: 30
+  lvlManager: {fileID: 556350053}
 --- !u!1 &1574340057
 GameObject:
   m_ObjectHideFlags: 0
